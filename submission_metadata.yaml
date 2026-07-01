@@ -8,18 +8,14 @@ primary_contact:
   name: "Chinmay A Telrandhe"
   email: "chinmayct7@gmail.com"
   phone: "+91-8830930390"
-
-team_members:
-  - name: "Chinmay A Telrandhe"
-    email: "chinmayct7@gmail.com"
-    role: "ML Engineer"
+  role: "ML Engineer"
 # ============================================================================
 # Code and reproducibility — UPDATE github_repo AND sandbox_link
 # ============================================================================
-github_repo: "https://github.com/YOUR_USERNAME/redrob-ranker"
+github_repo: "https://github.com/chinmayct7/Redrob-Ranker"
 
-sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
-# See submission_spec.md Section 10.5 for accepted sandbox platforms.
+sandbox_link: "https://chinmayct7-redrob-ranker-app-ztqml5.streamlit.app/"
+
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --jd ./data/job_description.md --out ./submission.csv"
 

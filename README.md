@@ -3,6 +3,9 @@
 **Challenge:** Intelligent Candidate Discovery & Ranking  
 **Role being ranked for:** Senior AI Engineer — Founding Team (Redrob AI)
 
+## Sandbox link
+**Link** https://chinmayct7-redrob-ranker-app-ztqml5.streamlit.app/
+
 ## Quickstart
 
 ```bash

@@ -1,0 +1,4 @@
+# Required for the Streamlit UI (app.py)
+streamlit>=1.32.0
+
+# Runtime ranking (rank.py) uses only Python stdlib — no additional deps needed.

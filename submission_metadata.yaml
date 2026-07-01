@@ -1,0 +1,95 @@
+
+# ============================================================================
+# Team identity — FILL THESE IN
+# ============================================================================
+team_name: "Alpha Codes"
+
+primary_contact:
+  name: "Chinmay A Telrandhe"
+  email: "chinmayct7@gmail.com"
+  phone: "+91-8830930390"
+
+team_members:
+  - name: "Chinmay A Telrandhe"
+    email: "chinmayct7@gmail.com"
+    role: "ML Engineer"
+# ============================================================================
+# Code and reproducibility — UPDATE github_repo AND sandbox_link
+# ============================================================================
+github_repo: "https://github.com/YOUR_USERNAME/redrob-ranker"
+
+sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
+# See submission_spec.md Section 10.5 for accepted sandbox platforms.
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --jd ./data/job_description.md --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Windows 11"
+  cpu_cores: 4
+  ram_gb: 8
+  python_version: "3.11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+# ============================================================================
+# Methodology summary
+# ============================================================================
+methodology_summary: |
+  This is a rule-based ranker, not a machine-learning model — no training,
+  no embeddings model, nothing that needs a GPU. It scores every candidate
+  through five layers and multiplies the results together.
+
+  1. Title & career tier: We built a title taxonomy tailored to this JD,
+     but we don't just reward fancy titles. A candidate with a plain,
+     unglamorous title still gets full credit if their work history shows
+     real production experience — that's the "Tier-5" bonus, aimed at
+     catching people who undersell themselves in their title.
+
+  2. Skill matching: The dataset uses 133 different ways of writing what
+     are really only 25 distinct skills (e.g. "Text Encoders" and
+     "Embeddings" are the same thing). We map all of them to one
+     canonical list so a candidate isn't penalized for wording. We also
+     cross-check each claimed skill against the platform's own assessment
+     scores, so someone who lists a skill but never actually demonstrated
+     it scores lower than someone who backs it up.
+
+  3. Semantic phrase matching: A lightweight statistical text-matching
+     technique (IDF) checks candidates' free-text descriptions against
+     about 45 phrases tied to real production AI/ML work — this catches
+     people who clearly did the work but described it in their own words
+     instead of using buzzwords.
+
+  4. Standard fit checks: experience level, location, education, and
+     whether their claims can be verified.
+
+  5. Behavioral signal gate: A multiplier (roughly 0.30x to 1.12x) based
+     on how recently they were active, how responsive they are, their
+     notice period, and whether their profile checks out — this can boost
+     a strong candidate slightly or meaningfully knock down a weak one.
+
+  On top of all that, seven "red flag" rules apply penalties for specific
+  bad-fit patterns — e.g. career spent entirely at consulting firms,
+  skills limited to computer vision/speech only, or experience that's
+  just superficial tool-calling rather than real engineering.
+
+  We also catch and throw out about 70 fake/impossible profiles — things
+  like overlapping full-time jobs or "expert" skills claimed with almost
+  no time spent on them — before scoring even starts.
+
+  The whole thing runs in about 53 seconds on a regular CPU for all
+  100,000 candidates, with no machine-learning models needed at
+  prediction time.
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
